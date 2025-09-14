@@ -41,7 +41,7 @@ __all__ = (
     "ShuffleNet",
     "CSPWithAtt",
     "DGC2f",
-    "SDPSA"
+    "SDPSA" #SPSA
 )
 
 
@@ -960,7 +960,7 @@ class PSA(nn.Module):
         return self.cv2(torch.cat((a, b), 1))
 
 class SDPSA(nn.Module):
-
+    """SPSA"""
     def __init__(self, c1, c2, e=0.5):
         super().__init__()
         assert(c1 == c2)

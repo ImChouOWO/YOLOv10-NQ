@@ -21,6 +21,7 @@ __all__ = (
     "CBAM",
     "Concat",
     "RepConv",
+    "Depwise" #SGMB
 )
 
 
@@ -95,7 +96,9 @@ class Conv(nn.Module):
     
 
 class Depwise(nn.Module):
+    
     """inspire by MobileNetv3 """
+    "SGMB"
     default_act = nn.SiLU()
     def __init__(self, c1, c2, k=3, s=1, p=None, g=1, d=1, act=True ):
         super().__init__()
