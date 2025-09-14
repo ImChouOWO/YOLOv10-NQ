@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "project",
+			"path": "../../../../.."
+		},
+		{
+			"name": "annotations",
+			"path": "../../../../../../Users/user/Downloads/annotations"
+		},
+		{
+			"name": "train2017",
+			"path": "../../../../../../Users/user/Downloads/train2017"
+		}
+	],
+	"settings": {}
+}
