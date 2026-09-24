@@ -5,7 +5,6 @@ Train a model on a dataset.
 Usage:
     $ yolo mode=train model=yolov8n.pt data=coco128.yaml imgsz=640 epochs=100 batch=16
 """
-import json
 import math
 import os
 import subprocess
@@ -543,38 +542,8 @@ class BaseTrainer:
             self.ema.update(self.model)
 
     def preprocess_batch(self, batch):
-        """Custom preprocessing including teacher model inference."""
-        # from ultralytics import YOLO  # 如果使用 YOLO 框架的教師模型
-        # teacher_model = YOLO("C:/project/yolov10/runs/detect/test_17_k137/train/weights/best.pt")  # 替換為教師模型的路徑
-        # teacher_model.to(self.device)  # 將模型移至設備
-        # teacher_model.eval()  # 設置為推論模式
-
-        # # 確保 batch["img"] 在正確的設備上
-        # images = batch["img"].to(self.device)
-
-        # # 使用教師模型對 batch 進行推論
-        # with torch.no_grad():  # 禁用梯度計算
-        #     teacher_outputs = teacher_model(images)
-
-        # # 將教師模型的預測加入 batch 中
-        # batch["teacher_preds"] = teacher_outputs  # 保存教師模型的輸出
-
-        # # 轉換 batch 為可序列化的格式
-        # serializable_batch = {
-        #     key: (
-        #         value.tolist() if isinstance(value, torch.Tensor) else value
-        #     ) for key, value in batch.items()
-        # }
-
-        # 保存為 JSON 文件
-        # output_path = os.path.join("output", "batch_output.json")
-        # os.makedirs(os.path.dirname(output_path), exist_ok=True)
-        # with open(output_path, "w") as json_file:
-        #     json.dump(serializable_batch, json_file, indent=4)
-
-        # print(f'Batch has been saved to {output_path}')
+        """Allow task-specific batch preprocessing."""
         return batch
-
 
     def validate(self):
         """

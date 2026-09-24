@@ -718,37 +718,9 @@ class v10DetectLoss:
     def __init__(self, model):
         self.one2many = v8DetectionLoss(model, tal_topk=10)
         self.one2one = v8DetectionLoss(model, tal_topk=1)
-    
-    def teacher(self,batch):
-        from ultralytics import YOLO
-        # 載入官方的預訓練模型，例如 YOLOv8
-        files = batch["im_file"]
-        model = YOLO('yolov8n.pt')  # 你可以更換成其他模型如 yolov8s.pt, yolov8x.pt 等
-        # 存儲結果的列表
-        all_bboxes = []
 
-        # 遍歷每張圖片進行推論
-        for image_path in files:
-            results = model(image_path)  # 推論
-            image_bboxes = []
-            
-            # 提取每張圖片的邊界框
-            for result in results:
-                for box in result.boxes:
-                    bbox = box.xyxy.tolist()[0]  # 轉為 [x1, y1, x2, y2] 格式
-                    conf = box.conf.tolist()[0]  # 獲取置信度
-                    cls = int(box.cls.tolist()[0])  # 獲取類別索引
-                    image_bboxes.append({'bbox': bbox, 'conf': conf, 'class': cls})
-            
-            # 將該圖片的所有 bbox 添加到總列表中
-            all_bboxes.append({'image_path': image_path, 'bboxes': image_bboxes})
-        return all_bboxes
-       
-
-       
     def __call__(self, preds, batch):
         # loss_one2one:29.753658294677734,loss_one2many:26.297395706176758
-        # print(self.teacher(batch))
         one2many = preds["one2many"]
         loss_one2many = self.one2many(one2many, batch)
         one2one = preds["one2one"]
