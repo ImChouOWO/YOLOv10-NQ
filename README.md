@@ -77,7 +77,8 @@ The repository does not include trained weights or the complete dataset. Paths i
 | **YOLOv10-NQ** | **0.92** | 0.80 | 0.91 | 0.61 |
 
 > [!NOTE]
-> 船舶資料集包含 20 類、15,100 張於高雄港周邊蒐集的影像。部分稀有類別樣本不足，結果仍受類別不平衡影響。
+> 船舶資料集包含 20 類、15,100 張於高雄港周邊蒐集的影像。
+> 部分稀有類別樣本不足，結果仍受類別不平衡影響。
 
 ---
 
@@ -87,7 +88,8 @@ The repository does not include trained weights or the complete dataset. Paths i
 
 ![DGC2F 架構](pic/DGC2F.jpg)
 
-DGC2F（Depthwise Group Coordinates-to-Features）以分組卷積建立多條特徵路徑，結合 Bottleneck 與反向瓶頸結構。不同 kernel size 擷取多尺度空間資訊，最後以殘差相加融合輸出。
+DGC2F（Depthwise Group Coordinates-to-Features）以分組卷積建立多條特徵路徑，結合 Bottleneck 與反向瓶頸結構。
+透過不同 kernel size 擷取多尺度空間資訊，最後以殘差相加融合輸出。
 
 | 設計 | 說明 |
 |---|---|
@@ -100,7 +102,8 @@ DGC2F（Depthwise Group Coordinates-to-Features）以分組卷積建立多條特
 
 ![SGMB 架構](pic/SGMB.jpg)
 
-SGMB（Squeeze-Gated Multi-Branch）先以 Global Average Pooling 產生通道權重，再將加權特徵送入一般瓶頸與反向瓶頸兩個分支。兩路特徵串接後經 Batch Normalization 與 SiLU 輸出。
+SGMB（Squeeze-Gated Multi-Branch）先以 Global Average Pooling 產生通道權重，再將加權特徵送入一般瓶頸與反向瓶頸兩個分支。
+兩路特徵串接後經 Batch Normalization 與 SiLU 輸出。
 
 | 設計 | 說明 |
 |---|---|
@@ -113,7 +116,8 @@ SGMB（Squeeze-Gated Multi-Branch）先以 Global Average Pooling 產生通道�
 
 ![SPSA 架構](pic/SPSA.jpg)
 
-SPSA（Shuffle Partial Self-Attention）只對部分通道執行 Multi-Head Self-Attention，再透過 Channel Shuffle 交換群組資訊；FFN 使用 3 × 3 Grouped Convolution 與 1 × 1 Convolution，以較低成本保留跨區域建模能力。
+SPSA（Shuffle Partial Self-Attention）只對部分通道執行 Multi-Head Self-Attention，再透過 Channel Shuffle 交換群組資訊
+FFN 使用 3 × 3 Grouped Convolution 與 1 × 1 Convolution，以較低成本保留跨區域建模能力。
 
 | 設計 | 說明 |
 |---|---|
@@ -192,34 +196,9 @@ python -m pip install -e .
 
 ## 資料集格式
 
-本專案使用 Ultralytics YOLO Detection 格式。影像與標記檔需使用相同檔名，每個物件以一行表示。
+本專案使用 Ultralytics YOLO Detection 格式。
 
-```text
-datasets/ships/
-├── images/
-│   ├── train/
-│   └── val/
-└── labels/
-    ├── train/
-    └── val/
-```
 
-```text
-datasets/ships/images/train/000001.jpg
-datasets/ships/labels/train/000001.txt
-```
-
-標記格式：
-
-```text
-class_id x_center y_center width height
-```
-
-座標均需依影像寬高正規化至 0 到 1。以下代表類別 `0` 的一個物件：
-
-```text
-0 0.5125 0.4833 0.2250 0.1667
-```
 
 請修改 [`data_cfg/dataset.yaml`](data_cfg/dataset.yaml)，將資料路徑換成自己的環境：
 
