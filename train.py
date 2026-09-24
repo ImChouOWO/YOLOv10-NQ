@@ -8,7 +8,7 @@ if __name__ == '__main__':
     mp.set_start_method('spawn', force=True)
     torch.cuda.empty_cache()
     # 初始化 YOLOv10 模型
-    model = YOLOv10('C:/project/yolov10/ultralytics/cfg/models/v10/yolov10nq2.yaml')
+    model = YOLOv10('./ultralytics/cfg/models/v10/yolov10nq2.yaml')
    
 
     # # # 檢查是否有已保存的權重，並載入
@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
     # # 開始訓練
     model.train(
-        data='C:/project/yolov10/data_cfg/dataset.yaml',  # 路徑到您的數據集 YAML 文件
+        data='./data_cfg/dataset.yaml',  # 路徑到您的數據集 YAML 文件
         epochs=300,  # 訓練輪數         
         batch=64,  # 批次大小（可根據需求調整）
         imgsz=640,  # 圖片尺寸
