@@ -48,7 +48,9 @@ The repository does not include trained weights or the complete dataset. Paths i
 | `SGMB` | `Depwise` | `ultralytics/nn/modules/conv.py` | 以通道門控及雙分支瓶頸強化關鍵特徵 |
 | `SPSA` | `SDPSA` | `ultralytics/nn/modules/block.py` | 對部分通道執行注意力、Channel Shuffle 與輕量 FFN |
 
-主要模型設定為 [`ultralytics/cfg/models/v10/yolov10nq2.yaml`](ultralytics/cfg/models/v10/yolov10nq2.yaml)。`yolov10nq.yaml` 為較早期的實驗設定。
+主要模型設定為 [`ultralytics/cfg/models/v10/yolov10nq2.yaml`](ultralytics/cfg/models/v10/yolov10nq2.yaml)。
+
+> `yolov10nq.yaml` 為較早期的實驗設定。
 
 ### 實驗數據
 
