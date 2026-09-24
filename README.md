@@ -54,7 +54,7 @@ The repository does not include trained weights or the complete dataset. Paths i
 
 #### Microsoft COCO 消融實驗
 
-依序將 SGMB、DGC2F 與 SPSA 導入 YOLOv10-n Backbone。下列數據整理自專案簡報。
+依序將 SGMB、DGC2F 與 SPSA 導入 YOLOv10-n Backbone並驗證其效能。
 
 | 模型 | Recall | mAP50 | mAP50-95 | Parameters |
 |---|---:|---:|---:|---:|
@@ -63,7 +63,7 @@ The repository does not include trained weights or the complete dataset. Paths i
 | SGMB + DGC2F + SPSA | 0.40 | 0.43 | 0.29 | 1.6M |
 | YOLOv10-n | 0.44 | 0.47 | 0.33 | 2.3M |
 
-完整 YOLOv10-NQ 相較簡報中的 YOLOv10-n 基準減少約 30% 參數量。
+完整 YOLOv10-NQ 相較 YOLOv10-n 減少約 30% 參數量。
 
 #### 自建船舶資料集
 
